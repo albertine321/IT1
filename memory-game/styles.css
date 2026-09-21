@@ -1,0 +1,64 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Fyller hele elementet med padding og border og bestemmer hvordan høyde og bredde skal beregnes */
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(247, 208, 92);
+}
+
+h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    color: rgb(239, 159, 39);
+    margin-top: 20px;
+}
+
+.memory-game{
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; /* gjør at kortene går til neste rekke i containeren for å fylle den */
+    perspective: 1000px; /* gir en 3D-effekt når kortene snus */
+}
+
+.memory-card{
+    width: calc(25% - 10px); /* kalkulerer bredde med padding og margin for å sikre at kortene fyller hele containeren */
+    height: calc(33.333% - 10px); /* kalkulerer høyde med padding og margin for å sikre at kortene fyller hele containeren */
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    transform: scale(1); /* skalerer kortene til sin opprinnelige størrelse */
+    transform-style: preserve-3d; /* beholder 3D-stilen for transformasjonen */
+    transition: transform .5s; /* legger til en overgangseffekt for transformasjonen */
+}
+
+.memory-card :active{ /*blir aktivert hver gang kortene blir trykket på (gir en liten bevegelse når man trykker)*/
+    transform: scale(0.97); /* skalerer kortene litt ned når de trykkes på */
+    transition: transform 0.2s; /* legger til en overgangseffekt for transformasjonen */
+}
+
+.memory-card.flip{ /* blir aktivert når kortene blir snudd */
+    transform: rotateY(180deg); /* roterer kortene 180 grader på Y-aksen */
+}
+
+.front-face, .back-face{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: absolute;
+    border-radius: 5px;
+    background: rgb(239, 159, 39);;
+    backface-visibility: hidden; /* gjemmer baksiden av kortene når de snus */
+}
+
+.front-face{
+    transform: rotateY(180deg); /* roterer forsiden av kortene 180 grader på Y-aksen */
+}
